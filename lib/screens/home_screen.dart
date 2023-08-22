@@ -87,6 +87,9 @@ class Home extends StatelessWidget {
                         color: whiteColor,
                         size: 26,
                       ),
+                      onTap: () {
+                        controller.playSong(snapshot.data![index].uri);
+                      },
                     ),
                   );
                 },
