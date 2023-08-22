@@ -42,15 +42,13 @@ class Home extends StatelessWidget {
             return Center(
               child: CircularProgressIndicator(),
             );
-          }
-          else if (snapshot.data!.isEmpty) {
+          } else if (snapshot.data!.isEmpty) {
             return Center(
                 child: Text(
               "No song found.",
               style: myTextStyle(),
             ));
-          } 
-          else {
+          } else {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
@@ -75,10 +73,14 @@ class Home extends StatelessWidget {
                           size: 12,
                         ),
                       ),
-                      leading: const Icon(
-                        Icons.music_note,
-                        color: whiteColor,
-                        size: 32,
+                      leading: QueryArtworkWidget(
+                        id: snapshot.data![index].id,
+                        type: ArtworkType.AUDIO,
+                        nullArtworkWidget: const Icon(
+                          Icons.music_note,
+                          color: whiteColor,
+                          size: 30,
+                        ),
                       ),
                       trailing: const Icon(
                         Icons.play_arrow,
