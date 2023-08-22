@@ -4,6 +4,7 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:project_dhun/constants/colors.dart';
 import 'package:project_dhun/constants/text_style.dart';
 import 'package:project_dhun/controllers/player_controller.dart';
+import 'package:project_dhun/screens/player_screen.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -89,7 +90,8 @@ class Home extends StatelessWidget {
                           size: 26,
                         ) : null,
                         onTap: () {
-                          controller.playSong(snapshot.data![index].uri, index);
+                          // controller.playSong(snapshot.data![index].uri, index); 
+                          Get.to(()=> const Player());
                         },
                       ),
                     ),
