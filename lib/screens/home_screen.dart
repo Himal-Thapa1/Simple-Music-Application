@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_dhun/constants/colors.dart';
 import 'package:project_dhun/constants/text_style.dart';
+import 'package:project_dhun/controllers/player_controller.dart';
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    var controller = Get.put(PlayerController());
+
     return Scaffold(
       backgroundColor: bgDarkColor,
       appBar: AppBar(
