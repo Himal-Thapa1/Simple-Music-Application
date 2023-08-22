@@ -46,7 +46,9 @@ class Player extends StatelessWidget {
                         size: 24,
                       ),
                     ),
-                    
+                    SizedBox(
+                      height: 12,
+                    ),
                     Text(
                       "Artist Name",
                       style: myTextStyle(
@@ -54,6 +56,61 @@ class Player extends StatelessWidget {
                         size: 20,
                       ),
                     ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "0:0",
+                          style: myTextStyle(color: bgDarkColor),
+                        ),
+                        Expanded(
+                            child: Slider(
+                                thumbColor: sliderColor,
+                                inactiveColor: bgColor,
+                                activeColor: sliderColor,
+                                value: 0.0,
+                                onChanged: (newValue) {})),
+                        Text(
+                          "04:00",
+                          style: myTextStyle(color: bgDarkColor),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.skip_previous_rounded,
+                              size: 40,
+                              color: bgDarkColor,
+                            )),
+                        CircleAvatar(
+                            radius: 35,
+                            backgroundColor: bgDarkColor,
+                            child: Transform.scale(
+                                scale: 2.5,
+                                child: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.play_arrow_rounded,
+                                      color: whiteColor,
+                                    )))),
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.skip_next_rounded,
+                              size: 40,
+                              color: bgDarkColor,
+                            )),
+                      ],
+                    )
                   ],
                 ),
               ),
