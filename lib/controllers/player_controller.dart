@@ -7,6 +7,9 @@ class PlayerController extends GetxController {
   final audioQuery = OnAudioQuery();
   final audioPlayer = AudioPlayer();
 
+  var playIndex = 0.obs;
+  var isPlaying = false.obs;
+
   @override
   void onInit() async {
     super.onInit();
@@ -28,12 +31,14 @@ class PlayerController extends GetxController {
     }
   }
 
-  playSong(String? uri) {
+  playSong(String? uri, index) {
+    playIndex.value = index;
     try {
       audioPlayer.setAudioSource(
         AudioSource.uri(Uri.parse(uri!)),
       );
       audioPlayer.play();
+      isPlaying(true);
     } on Exception catch (e) {
       print(e.toString());
     }

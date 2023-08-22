@@ -57,39 +57,41 @@ class Home extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     margin: const EdgeInsets.only(bottom: 4),
-                    child: ListTile(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                      tileColor: bgColor,
-                      title: Text(
-                        "${snapshot.data![index].displayNameWOExt}",
-                        style: myTextStyle(
-                          size: 14,
+                    child: Obx(
+                      () => ListTile(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
+                        tileColor: bgColor,
+                        title: Text(
+                          "${snapshot.data![index].displayNameWOExt}",
+                          style: myTextStyle(
+                            size: 14,
+                          ),
                         ),
-                      ),
-                      subtitle: Text(
-                        "${snapshot.data![index].artist}",
-                        style: myTextStyle(
-                          size: 12,
+                        subtitle: Text(
+                          "${snapshot.data![index].artist}",
+                          style: myTextStyle(
+                            size: 12,
+                          ),
                         ),
-                      ),
-                      leading: QueryArtworkWidget(
-                        id: snapshot.data![index].id,
-                        type: ArtworkType.AUDIO,
-                        nullArtworkWidget: const Icon(
-                          Icons.music_note,
+                        leading: QueryArtworkWidget(
+                          id: snapshot.data![index].id,
+                          type: ArtworkType.AUDIO,
+                          nullArtworkWidget: const Icon(
+                            Icons.music_note,
+                            color: whiteColor,
+                            size: 30,
+                          ),
+                        ),
+                        trailing: controller.playIndex.value == index && controller.isPlaying.value ? Icon(
+                          Icons.play_arrow,
                           color: whiteColor,
-                          size: 30,
-                        ),
+                          size: 26,
+                        ) : null,
+                        onTap: () {
+                          controller.playSong(snapshot.data![index].uri, index);
+                        },
                       ),
-                      trailing: const Icon(
-                        Icons.play_arrow,
-                        color: whiteColor,
-                        size: 26,
-                      ),
-                      onTap: () {
-                        controller.playSong(snapshot.data![index].uri);
-                      },
                     ),
                   );
                 },
