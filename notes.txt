@@ -1,0 +1,6 @@
+=>  Here now to be able to read and write in the device, We need to give the app permission, For that
+    goto android>app>src>main>androidmanifest.xl file and under first manifest add this
+        <uses-permission android:name="android_permission.READ_EXTERNAL_STORAGE"/>
+        <uses-permission android:name="android_permission.WRITE_EXTERNAL_STORAGE"/>
+
+=> 
