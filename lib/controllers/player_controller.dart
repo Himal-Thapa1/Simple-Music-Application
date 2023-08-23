@@ -10,6 +10,9 @@ class PlayerController extends GetxController {
   var playIndex = 0.obs;
   var isPlaying = false.obs;
 
+  var duration = "".obs;
+  var position = "".obs;
+
   @override
   void onInit() async {
     super.onInit();
@@ -21,6 +24,15 @@ class PlayerController extends GetxController {
   void onClose() {
     audioPlayer.dispose();
     super.onClose();
+  }
+
+  updatePosition() {
+    audioPlayer.durationStream.listen((d) {
+      duration.value = d.toString().split(".")[0];
+    });
+    audioPlayer.positionStream.listen((p) {
+      position.value = p.toString().split(".")[0];
+    });
   }
 
   checkPermission() async {
@@ -39,6 +51,7 @@ class PlayerController extends GetxController {
       );
       audioPlayer.play();
       isPlaying(true);
+      updatePosition();
     } on Exception catch (e) {
       print(e.toString());
     }
