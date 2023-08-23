@@ -86,12 +86,19 @@ class Player extends StatelessWidget {
                             style: myTextStyle(color: bgDarkColor),
                           ),
                           Expanded(
-                              child: Slider(
-                                  thumbColor: sliderColor,
-                                  inactiveColor: bgColor,
-                                  activeColor: sliderColor,
-                                  value: 0.0,
-                                  onChanged: (newValue) {})),
+                            child: Slider(
+                              thumbColor: sliderColor,
+                              inactiveColor: bgColor,
+                              activeColor: sliderColor,
+                              value: controller.value.value,
+                              min: Duration(seconds: 0).inSeconds.toDouble(),
+                              max: controller.max.value,
+                              onChanged: (newValue) {
+                                controller.changeDurationToSeconds(newValue.toInt());
+                                newValue =newValue;
+                              },
+                            ),
+                          ),
                           Text(
                             controller.duration.value,
                             style: myTextStyle(color: bgDarkColor),

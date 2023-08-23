@@ -13,6 +13,9 @@ class PlayerController extends GetxController {
   var duration = "".obs;
   var position = "".obs;
 
+  var max = 0.0.obs;
+  var value = 0.0.obs;
+
   @override
   void onInit() async {
     super.onInit();
@@ -29,9 +32,11 @@ class PlayerController extends GetxController {
   updatePosition() {
     audioPlayer.durationStream.listen((d) {
       duration.value = d.toString().split(".")[0];
+      max.value = d!.inSeconds.toDouble();
     });
     audioPlayer.positionStream.listen((p) {
       position.value = p.toString().split(".")[0];
+      value.value = p.inSeconds.toDouble();
     });
   }
 
@@ -41,6 +46,11 @@ class PlayerController extends GetxController {
     } else {
       checkPermission();
     }
+  }
+
+  changeDurationToSeconds(seconds){
+    var duration = Duration(seconds: seconds);
+    audioPlayer.seek(duration);
   }
 
   playSong(String? uri, index) {
