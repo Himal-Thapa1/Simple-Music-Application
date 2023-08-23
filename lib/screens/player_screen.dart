@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 import 'package:project_dhun/constants/colors.dart';
 import 'package:project_dhun/constants/text_style.dart';
+import 'package:project_dhun/controllers/player_controller.dart';
 
 class Player extends StatelessWidget {
-  const Player({super.key});
+  final SongModel data;
+
+  const Player({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.find<PlayerController>();
+
     return Scaffold(
       backgroundColor: bgDarkColor,
       appBar: AppBar(),
@@ -16,12 +23,24 @@ class Player extends StatelessWidget {
           children: [
             Expanded(
               child: Container(
+                // height: 250,
+                // width: 250,
                 alignment: Alignment.center,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.red,
                 ),
-                child: const Icon(Icons.music_note),
+                child: QueryArtworkWidget(
+                  id: data.id,
+                  type: ArtworkType.AUDIO,
+                  artworkHeight: double.infinity,
+                  artworkWidth: double.infinity,
+                  nullArtworkWidget: Icon(
+                    Icons.music_note,
+                    size: 48,
+                    color: whiteColor,
+                  ),
+                ),
               ),
             ),
             SizedBox(
@@ -40,7 +59,7 @@ class Player extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "Music Name",
+                      data.displayNameWOExt,
                       style: myTextStyle(
                         color: Colors.black,
                         size: 24,
@@ -50,7 +69,7 @@ class Player extends StatelessWidget {
                       height: 12,
                     ),
                     Text(
-                      "Artist Name",
+                      data.artist.toString(),
                       style: myTextStyle(
                         color: Colors.black,
                         size: 20,
@@ -91,17 +110,35 @@ class Player extends StatelessWidget {
                               size: 40,
                               color: bgDarkColor,
                             )),
-                        CircleAvatar(
+                        Obx(
+                          () => CircleAvatar(
                             radius: 35,
                             backgroundColor: bgDarkColor,
                             child: Transform.scale(
-                                scale: 2.5,
-                                child: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.play_arrow_rounded,
-                                      color: whiteColor,
-                                    )))),
+                              scale: 2,
+                              child: IconButton(
+                                onPressed: () {
+                                  if (controller.isPlaying.value) {
+                                    controller.audioPlayer.pause();
+                                    controller.isPlaying(false);
+                                  } else {
+                                    controller.audioPlayer.play();
+                                    controller.isPlaying(true);
+                                  }
+                                },
+                                icon: controller.isPlaying.value
+                                    ? const Icon(
+                                        Icons.pause,
+                                        color: whiteColor,
+                                      )
+                                    : Icon(
+                                        Icons.play_arrow_rounded,
+                                        color: whiteColor,
+                                      ),
+                              ),
+                            ),
+                          ),
+                        ),
                         IconButton(
                             onPressed: () {},
                             icon: Icon(

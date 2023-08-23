@@ -84,14 +84,19 @@ class Home extends StatelessWidget {
                             size: 30,
                           ),
                         ),
-                        trailing: controller.playIndex.value == index && controller.isPlaying.value ? Icon(
-                          Icons.play_arrow,
-                          color: whiteColor,
-                          size: 26,
-                        ) : null,
+                        trailing: controller.playIndex.value == index &&
+                                controller.isPlaying.value
+                            ? Icon(
+                                Icons.play_arrow,
+                                color: whiteColor,
+                                size: 26,
+                              )
+                            : null,
                         onTap: () {
-                          // controller.playSong(snapshot.data![index].uri, index); 
-                          Get.to(()=> const Player());
+                          controller.playSong(snapshot.data![index].uri, index);
+                          Get.to(() => Player(
+                                data: snapshot.data![index],
+                              ));
                         },
                       ),
                     ),
